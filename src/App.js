@@ -8,6 +8,8 @@ class App extends Component {
 
     this.state = {
       isClicked: false,
+      inputValue: "",
+      listOfTodos: [],
     };
   }
 
@@ -17,13 +19,38 @@ class App extends Component {
     });
   };
 
+  handleChange = (event) => {
+    this.setState({ inputValue: event.target.value });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.setState({
+      listOfTodos: [...this.state.listOfTodos, this.state.inputValue],
+    });
+    this.setState({ inputValue: "" });
+  };
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              value={this.state.inputValue}
+              onChange={this.handleChange}
+            ></input>
+            <button type="submit">Submit here</button>
+          </form>
+          <ol>
+            {this.state.listOfTodos.map((todo, index) => {
+              return <li key={index}>{todo}</li>;
+            })}
+          </ol>
           <p>{this.state.isClicked ? "true" : "false"}</p>
-          <button onClick={this.click}>Click</button>
+
           <a
             className="App-link"
             href="https://reactjs.org"
