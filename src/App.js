@@ -31,6 +31,13 @@ class App extends Component {
     this.setState({ inputValue: "" });
   };
 
+  deleteTodo = (index) => {
+    this.setState({
+      ...this.state,
+      listOfTodos: this.state.listOfTodos.filter((_, i) => i !== index),
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -46,7 +53,12 @@ class App extends Component {
           </form>
           <ol>
             {this.state.listOfTodos.map((todo, index) => {
-              return <li key={index}>{todo}</li>;
+              return (
+                <li key={index}>
+                  {todo}
+                  <button onClick={() => this.deleteTodo(index)}>Delete</button>
+                </li>
+              );
             })}
           </ol>
           <p>{this.state.isClicked ? "true" : "false"}</p>
