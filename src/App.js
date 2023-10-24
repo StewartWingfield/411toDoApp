@@ -7,17 +7,16 @@ class App extends Component {
     super(props);
 
     this.state = {
-      isClicked: false,
       inputValue: "",
       listOfTodos: [],
     };
   }
 
-  click = () => {
+  /*   click = () => {
     this.setState({
       isClicked: !this.state.isClicked,
     });
-  };
+  }; */
 
   handleChange = (event) => {
     this.setState({ inputValue: event.target.value });
@@ -49,7 +48,7 @@ class App extends Component {
               value={this.state.inputValue}
               onChange={this.handleChange}
             ></input>
-            <button type="submit">Submit here</button>
+            <button type="submit">Add to list</button>
           </form>
           <ol>
             {this.state.listOfTodos.map((todo, index) => {
@@ -61,7 +60,6 @@ class App extends Component {
               );
             })}
           </ol>
-          <p>{this.state.isClicked ? "true" : "false"}</p>
 
           <a
             className="App-link"
